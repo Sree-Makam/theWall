@@ -1,0 +1,5 @@
+table, tbody, th, td{
+    border: 1px solid brown;
+    padding: 7px;
+    margin: 2px;
+}

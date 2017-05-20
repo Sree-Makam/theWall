@@ -1,0 +1,12 @@
+.pokemonDiv{
+    width: 250px;
+    height: 200px;
+    background-color: lightyellow;
+    display: inline-block;
+    margin: 3px;
+    padding: 3px;
+    border: 1px solid darkgreen;
+    text-align: center;
+    vertical-align: top;
+}
+
