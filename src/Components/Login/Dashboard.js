@@ -5,9 +5,10 @@ import PostItem from "./PostItem.js";
 class Dashboard extends Component{
     constructor(props){
         super(props);
-        this.state = {posts:[], text:""}
+        this.state = {posts:[], text:""}        
     }
     
+    //callback function 
     addPost = (e) =>{
         console.log(e.target.value)
         this.setState({
