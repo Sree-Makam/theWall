@@ -10,7 +10,7 @@ class Dashboard extends Component{
     
     //callback function 
     addPost = (e) =>{
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setState({
             text : e.target.value
         })
@@ -64,6 +64,20 @@ class Dashboard extends Component{
         })
     }
 
+    authenticate = () =>{
+        // console.log("authenticate running")
+        Axios.get(("http://54.245.42.196/users/"+ this.props.match.params.userId + "/authenticate"), {headers: {
+            Authorization: localStorage.getItem("jw-token")}
+        }).then((result) => {
+            // console.log(result)
+            // console.log(result.data.user.username)
+            localStorage.setItem("authenticateduser",result.data.user._id)
+            localStorage.setItem("username", result.data.user.username);
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
+
     logOut = () =>{
         localStorage.setItem("jw-token", "");
         this.props.history.push("/login");
@@ -74,19 +88,20 @@ class Dashboard extends Component{
     }
 
     render(){
+        this.authenticate();
         let posts = this.state.posts.map((value,index)=>{
             //console.log(value._id);
             let logged_id = this.props.match.params.userId;
             return(
                 <div key={index}>
-                    <PostItem post={value} logged_id={logged_id} deletePost={this.deletePost}/>
+                    <PostItem post={value} logged_id={logged_id} deletePost={this.deletePost} />
                 </div>
             )                    
         })
         return(
             <div>
                 <button onClick={this.logOut} style={{float: "right", marginRight:"15px"}} className="btn btn-primary">Logout</button>
-                <h1>Welcome, </h1>
+                <h1>Welcome, {localStorage.getItem("username")}</h1>
                 <h1>The Wall</h1>
                 <h4>New Post</h4>
                 <textarea rows="5" cols="100"  value={this.state.text} onChange={this.addPost}></textarea><br/>

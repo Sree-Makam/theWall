@@ -7,26 +7,7 @@ class Login extends Component{
         super(props);
         this.state = {username: "", password: "", error:""}
     }
-    render(){
-        return(
-            <div className="post-lecture">
-                <div className="container">
-                    <h1>Sign In</h1>
-                    <form onSubmit={this.login}>
-                        <label>UserName</label>
-                        <input type="text" className="form-control" name="username" 
-                               onChange={this.handleChange} value={this.state.username} />
-                        <label>Password</label>
-                        <input type="password" className="form-control" name="password" 
-                               onChange={this.handleChange} value={this.state.password} />
-                        <input type="submit" className="btn btn-primary" />                        
-                    </form>
-                    <h3>{this.state.error}</h3>
-                </div>
-            </div>
-        )
-    }
-
+    
     handleChange = (e) =>{
         this.setState({
             [e.target.name]: e.target.value
@@ -50,6 +31,26 @@ class Login extends Component{
             this.setState({error: "Invalid Credentials"})
         })
     } 
+    render(){
+        return(
+            <div className="post-lecture">
+                <div className="container">
+                    <h1>Sign In</h1>
+                    <form onSubmit={this.login}>
+                        <label>UserName</label>
+                        <input type="text" className="form-control" name="username" 
+                               onChange={this.handleChange} value={this.state.username} />
+                        <label>Password</label>
+                        <input type="password" className="form-control" name="password" 
+                               onChange={this.handleChange} value={this.state.password} />
+                        <input type="submit" className="btn btn-primary" />                        
+                    </form>
+                    <h3>{this.state.error}</h3>
+                </div>
+            </div>
+        )
+    }
+
 
 
 }

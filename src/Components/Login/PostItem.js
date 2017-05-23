@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
-import Axios from 'axios';
+// import Axios from 'axios';
 
 class PostItem extends Component{
-    deletePost = (post_id) => {
+    deletePost = (post_id) => {        
         this.props.deletePost(this.props.post._id, this.props.logged_id);
-    }
+        }    
     render(){
         // console.log(this.props.post._author._id)
          //console.log(this.props.post._id)
