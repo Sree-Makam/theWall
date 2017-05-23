@@ -89,27 +89,36 @@ class Dashboard extends Component{
 
     render(){
         this.authenticate();
-        let posts = this.state.posts.map((value,index)=>{
-            //console.log(value._id);
-            let logged_id = this.props.match.params.userId;
+        if (localStorage.getItem("authenticateduser") === this.props.match.params.userId){
+            let posts = this.state.posts.map((value,index)=>{
+                //console.log(value._id);
+                let logged_id = this.props.match.params.userId;
+                return(
+                    <div key={index}>
+                        <PostItem post={value} logged_id={logged_id} deletePost={this.deletePost} />
+                    </div>
+                )                    
+            })
             return(
-                <div key={index}>
-                    <PostItem post={value} logged_id={logged_id} deletePost={this.deletePost} />
+                <div>
+                    <button onClick={this.logOut} style={{float: "right", marginRight:"15px"}} className="btn btn-primary">Logout</button>
+                    <h1>Welcome, {localStorage.getItem("username")}</h1>
+                    <h1>The Wall</h1>
+                    <h4>New Post</h4>
+                    <textarea rows="5" cols="100"  value={this.state.text} onChange={this.addPost}></textarea><br/>
+                    <input type='button' name='addText' value='Create New Post' onClick={this.newPost}/>
+                    {posts}
+                    
                 </div>
-            )                    
-        })
-        return(
-            <div>
-                <button onClick={this.logOut} style={{float: "right", marginRight:"15px"}} className="btn btn-primary">Logout</button>
-                <h1>Welcome, {localStorage.getItem("username")}</h1>
-                <h1>The Wall</h1>
-                <h4>New Post</h4>
-                <textarea rows="5" cols="100"  value={this.state.text} onChange={this.addPost}></textarea><br/>
-                <input type='button' name='addText' value='Create New Post' onClick={this.newPost}/>
-                {posts}
-                
-            </div>
-        )
+            )
+        } else {
+            return(
+                <div>
+                    {this.logOut()}    
+                </div>
+            )
+        }
+
     }
     
 }
